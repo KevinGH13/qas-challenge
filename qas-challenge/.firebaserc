@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "qas-challenge": {
+      "hosting": {
+        "qas-challenge": [
+          "qas-challenge"
+        ]
+      }
+    }
+  }
+}
