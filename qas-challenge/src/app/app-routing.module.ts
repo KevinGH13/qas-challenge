@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'home', component: QuestionboxComponent },
   { path: 'questions', component: QuestionsComponent },
   { path: 'questions/:id', component: QuestiondetailsComponent },
-  { path: 'detail/:id', component: QuestiondetailsComponent },
+  { path: 'detail/:uid', component: QuestiondetailsComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

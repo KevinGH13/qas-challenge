@@ -1,7 +1,10 @@
+import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
+import * as uuid from 'uuid';
+
 
 @Component({
   selector: 'app-questionbox',
@@ -30,9 +33,10 @@ export class QuestionboxComponent implements OnInit {
         this.firestore
           .collection("questions")
           .add({
-            "uid": user.uid,
+            "userUid": user.uid,
             "userName": user.displayName,
             "createdAt": firebase.firestore.FieldValue.serverTimestamp(),
+            "questionId": Math.floor(Math.random() * 23432) + 1,
             "question": this.question,
             "description": this.description,
             "photoUrl": user.photoURL,

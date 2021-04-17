@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -10,75 +12,28 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class QuestiondetailsComponent implements OnInit {
 
-  listQuestion: any[] = [
-    {
-      "id": 1,
-      "question": "this is a question?",
-      "description": "Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.",
-      "user": "Name Lastname Lastname",
-      "positiveCount": 3,
-      "negativeCount": 1,
-      "comments": [
-        {
-          "id": 1,
-          "comment": "this is a comment",
-          "user": "Name Lastname Lastname",
-          "positiveCount": 3,
-          "negativeCount": 1,
-        },
-        {
-          "id": 2,
-          "comment": "this is a comment",
-          "user": "Name Lastname Lastname",
-          "positiveCount": 30,
-          "negativeCount": 12,
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "question": "this is other question?",
-      "description": "Curabitur accumsan turpis pharetra augue tincidunt blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id. Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque nisl.",
-      "user": "Name Lastname Lastname",
-      "positiveCount": 3,
-      "negativeCount": 1,
-      "comments": [
-        {
-          "id": 1,
-          "comment": "this is a comment",
-          "user": "Name Lastname Lastname",
-          "positiveCount": 3,
-          "negativeCount": 1,
-        },
-        {
-          "id": 2,
-          "comment": "this is a comment",
-          "user": "Name Lastname Lastname",
-          "positiveCount": 30,
-          "negativeCount": 12,
-        }
-      ]
-    }
-  ];
-
+  listQuestion: any[] = [];
   user: any;
-  constructor(private activatedRoute: ActivatedRoute, public auth: AngularFireAuth) {
+  question : Observable<any[]>
+  
+
+  constructor(private activatedRoute: ActivatedRoute, public auth: AngularFireAuth, public firestore:AngularFirestore) {
     this.auth.user.subscribe((user) => {
       this.user = user;
     });
+
+    this.question = firestore.collection('questions').valueChanges();
   }
 
   ngOnInit(): void {
-    this.getQuestion(this.activatedRoute.snapshot.paramMap.get('id'));
+  this.getQuestion();
   }
 
-  getQuestion(id: String) {
-    this.activatedRoute.params.subscribe(params => {
-      if (params.id) {
-        this.listQuestion = this.listQuestion.filter(x => x.id == params.id);
-      }
+  getQuestion(): any{
+    this.question.subscribe(data => {
+      this.listQuestion = data.filter(x => x.questionId == this.activatedRoute.snapshot.paramMap.get("uid"));
     });
-    console.log(this.listQuestion)
   }
+
 
 }
