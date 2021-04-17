@@ -3,20 +3,20 @@
       <div class="content">
         <h1>Questions</h1>
         <hr>
-        <div *ngFor="let question of listQuestions">
+        <div *ngFor="let question of listQuestions | async">
           <div class="columns is-mobile">
             <div class="column is-1">
   
               <figure class="image is-32x32">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                <img class="is-rounded" src="{{question.photoUrl}}">
               </figure>
             </div>
             <div class="column">
-              <a [routerLink]="['/','detail',question.id]">
+              <a [routerLink]="['/','detail',question.uid]">
                 <p>{{ question.question }}</p>
               </a>
             </div>
-            <div class="column is-2 ">{{ question.user }}</div>
+            <div class="column is-2 ">{{ question.userName }}</div>
           </div>
         </div>
       </div>

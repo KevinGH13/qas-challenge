@@ -35,6 +35,7 @@ export class QuestionboxComponent implements OnInit {
             "createdAt": firebase.firestore.FieldValue.serverTimestamp(),
             "question": this.question,
             "description": this.description,
+            "photoUrl": user.photoURL,
           })
           .catch((error) => { console.log(error); });
       });
