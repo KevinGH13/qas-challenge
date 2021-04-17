@@ -1,1 +1,68 @@
-<p>questiondetails works!</p>
+<div *ngFor="let item of listQuestion">
+    <div class="box">
+      <div class="box">
+        <div class="content">
+          <h2>{{item.question}} </h2>
+          <hr>
+          <p> {{item.description}}</p>
+        </div>
+        <hr>
+        <h5>asked by {{item.user}} at DD/mm/YYYY</h5>
+      </div>
+      <div>
+        <div class="content">
+          <form id="answerQuestion">
+            <div class="field">
+              <label class="label">Answer this question</label>
+              <div class="control">
+                <textarea class="textarea" placeholder="Your answer." rows="2"></textarea>
+              </div>
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link">Submit</button>
+              </div>
+              <div class="control">
+                <button class="button is-link is-light">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="content">
+        <h1>Answers</h1>
+        <hr>
+        <div class="columns is-mobile" *ngFor="let comment of item.comments">
+          <div class="column is-1">
+            <figure class="image is-32x32">
+              <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+            </figure>
+          </div>
+          <div class="column is-2 ">{{ comment.name }}</div>
+          <div class="column">
+            <p> {{ comment.comment}} </p>
+          </div>
+          <div class="column is-2">
+            <p class="buttoms">
+              <button class="button is-success">
+                <span class="icon is-small">
+                  {{comment.positiveCount}}
+                </span>
+              </button>
+              &nbsp;
+              <button class="button is-danger">
+                <span class="icon is-small">
+                  {{comment.negativeCount}}
+                </span>
+                <!--<span>Down</span>-->
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>
