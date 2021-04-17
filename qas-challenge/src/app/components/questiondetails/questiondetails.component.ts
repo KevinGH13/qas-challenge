@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -60,7 +61,12 @@ export class QuestiondetailsComponent implements OnInit {
     }
   ];
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  user: any;
+  constructor(private activatedRoute: ActivatedRoute, public auth: AngularFireAuth) {
+    this.auth.user.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   ngOnInit(): void {
     this.getQuestion(this.activatedRoute.snapshot.paramMap.get('id'));

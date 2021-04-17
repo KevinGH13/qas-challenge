@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-     firebase: {
+  firebase: {
     apiKey: "AIzaSyA9Q28wRqcM97IFNRB8bH-1GgYymHDW3DA",
     authDomain: "qas-challenge.firebaseapp.com",
     projectId: "qas-challenge",

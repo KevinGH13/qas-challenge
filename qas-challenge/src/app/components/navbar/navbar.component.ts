@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       this.user = user;
     });
+
   }
 
   signOut() {

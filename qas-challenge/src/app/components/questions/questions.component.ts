@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
 
 
 @Component({
@@ -20,8 +23,16 @@ export class QuestionsComponent implements OnInit {
       "question": "this is other question?",
       "user": "Name Lastname Lastname"
     }
-  ]
-  constructor() { }
+  ];
+
+  user: any;
+
+
+  constructor(public firestore: AngularFirestore, public auth: AngularFireAuth) {
+    this.auth.user.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   ngOnInit(): void {
   }
