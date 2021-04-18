@@ -74,7 +74,6 @@ export class QuestiondetailsComponent implements OnInit {
       });
   }
 
-
   increaseVote(answerUid: number) {
     this.auth.user
       .subscribe(() => {
@@ -100,5 +99,5 @@ export class QuestiondetailsComponent implements OnInit {
   }
 
 
-
+  
 }
