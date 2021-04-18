@@ -15,15 +15,17 @@
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
-        <div *ngIf="user === null">
+        <div *ngIf="user === null; else logout">
           <a class="button is-primary" (click)="signIn()">
             <strong>Sign in</strong>
           </a>
+          <a #logout class="button is-light" (click)="signOut()"> Log out </a>
         </div>
-        <div *ngIf="user !== null">
-          <a class="button is-light" (click)="signOut()"> Log out </a>
-        </div>
-        <!--<a class="button is-light"> Log out </a>-->
+        <ng-template #logout>
+          <div>
+            <a class="button is-light" (click)="signOut()"> Log out </a>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

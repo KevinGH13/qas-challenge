@@ -16,9 +16,10 @@ export class QuestionboxComponent implements OnInit {
   user: any;
   question: string;
   description: string;
+  idQuestion: any;
 
-  constructor(public auth: AngularFireAuth, public firestore: AngularFirestore , private route: Router
-    ) {
+  constructor(public auth: AngularFireAuth, public firestore: AngularFirestore, private route: Router
+  ) {
     this.auth.user.subscribe((user) => {
       this.user = user;
     });
@@ -27,23 +28,24 @@ export class QuestionboxComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   createQuestion() {
+    this.idQuestion = Math.floor(Math.random() * 23432) + 1;
     this.auth.user
       .subscribe((user) => {
         this.firestore
           .collection("questions")
-          .add({
+          .doc(this.idQuestion.toString())
+          .set({
             "userUid": user.uid,
             "userName": user.displayName,
             "createdAt": firebase.firestore.FieldValue.serverTimestamp(),
-            "questionId": Math.floor(Math.random() * 23432) + 1,
+            "questionId": this.idQuestion,
             "question": this.question,
             "description": this.description,
             "photoUrl": user.photoURL,
           })
           .catch((error) => { console.log(error); });
       });
-      this.route.navigate(["/questions"])
-    }
+    this.route.navigate(["/questions"])
+  }
 }

@@ -16,6 +16,7 @@ export class QuestiondetailsComponent implements OnInit {
   listQuestion: any[] = [];
   listAnswer: any[] = [];
   questionId: any;
+  answerId: any;
   answer: string;
   user: any;
   question: Observable<any[]>;
@@ -56,22 +57,26 @@ export class QuestiondetailsComponent implements OnInit {
   }
 
   createAnswer() {
+    this.answerId = Math.floor(Math.random() * 23432) + 1;
     this.auth.user
       .subscribe((user) => {
         this.firestore
           .collection("answers")
-          .add({
+          .doc(this.answerId.toString())
+          .set({
             "userUid": user.uid,
             "userName": user.displayName,
             "photoUrl": user.photoURL,
             "createdAt": firebase.firestore.FieldValue.serverTimestamp(),
             "questionId": this.activatedRoute.snapshot.paramMap.get("uid"),
-            "comment": this.answer,
+            "answerId": this.answerId,
+            "answer": this.answer,
             "positiveVotes": 0,
             "negativeVotes": 0,
           })
           .catch((error) => { console.log(error); });
       });
+    this.answer = "";
   }
 
   increaseVote(answerUid: number) {
@@ -97,7 +102,4 @@ export class QuestiondetailsComponent implements OnInit {
           })
       })
   }
-
-
-  
 }
