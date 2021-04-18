@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-  ActivatedRouteSnapshot,
-} from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -31,9 +25,7 @@ export class QuestionsComponent implements OnInit {
     });
 
     this.listQuestions = query.valueChanges();
-
-    this.listQuestions.subscribe(x =>  console.log(x));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

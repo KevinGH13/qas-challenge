@@ -29,13 +29,11 @@ export class QuestiondetailsComponent implements OnInit {
 
     this.question = firestore.collection('questions').valueChanges();
 
-    this.question.subscribe(x => console.log("questions ", x));
-
     const query = firestore.collection("answers", (order) => {
       return order.orderBy('positiveVotes', 'desc')
     });
+
     this.answers = query.valueChanges();
-    this.answers.subscribe(x => console.log("respuesas: ", x));
   }
 
   ngOnInit(): void {
@@ -65,6 +63,7 @@ export class QuestiondetailsComponent implements OnInit {
           .add({
             "userUid": user.uid,
             "userName": user.displayName,
+            "photoUrl": user.photoURL,
             "createdAt": firebase.firestore.FieldValue.serverTimestamp(),
             "questionId": this.activatedRoute.snapshot.paramMap.get("uid"),
             "comment": this.answer,
