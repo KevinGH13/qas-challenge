@@ -1,9 +1,7 @@
-import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
-import * as uuid from 'uuid';
 
 
 @Component({
