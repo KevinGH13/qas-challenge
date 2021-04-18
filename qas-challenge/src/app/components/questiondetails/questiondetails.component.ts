@@ -77,7 +77,6 @@ export class QuestiondetailsComponent implements OnInit {
           .catch((error) => { console.log(error); });
         this.answer = '';
       });
-
   }
 
   increaseVote(answerUid: number) {
