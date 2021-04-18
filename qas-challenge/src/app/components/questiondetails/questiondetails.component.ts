@@ -73,4 +73,32 @@ export class QuestiondetailsComponent implements OnInit {
           .catch((error) => { console.log(error); });
       });
   }
+
+
+  increaseVote(answerUid: number) {
+    this.auth.user
+      .subscribe(() => {
+        this.firestore
+          .collection("answers")
+          .doc(answerUid.toString())
+          .update({
+            "positiveVotes": firebase.firestore.FieldValue.increment(1),
+          })
+      })
+  }
+
+  decreaseVote(answerUid: number) {
+    this.auth.user
+      .subscribe(() => {
+        this.firestore
+          .collection("answers")
+          .doc(answerUid.toString())
+          .update({
+            "negativeVotes": firebase.firestore.FieldValue.increment(1),
+          })
+      })
+  }
+
+
+
 }

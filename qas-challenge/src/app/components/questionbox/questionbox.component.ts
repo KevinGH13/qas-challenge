@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -15,7 +17,8 @@ export class QuestionboxComponent implements OnInit {
   question: string;
   description: string;
 
-  constructor(public auth: AngularFireAuth, public firestore: AngularFirestore) {
+  constructor(public auth: AngularFireAuth, public firestore: AngularFirestore , private route: Router
+    ) {
     this.auth.user.subscribe((user) => {
       this.user = user;
     });
@@ -41,5 +44,6 @@ export class QuestionboxComponent implements OnInit {
           })
           .catch((error) => { console.log(error); });
       });
-  }
+      this.route.navigate(["/questions"])
+    }
 }
