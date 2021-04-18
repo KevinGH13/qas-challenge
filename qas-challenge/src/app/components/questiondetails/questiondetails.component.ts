@@ -75,8 +75,9 @@ export class QuestiondetailsComponent implements OnInit {
             "negativeVotes": 0,
           })
           .catch((error) => { console.log(error); });
+        this.answer = '';
       });
-    this.answer = "";
+
   }
 
   increaseVote(answerUid: number) {
